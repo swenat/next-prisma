@@ -11,7 +11,7 @@
     "seed": "prisma db seed",
     "reset": "tsx prisma/reset.ts",
     "studio": "prisma studio",
-    "test": "cypress open"
+    "test": "cypress open --e2e -b chrome"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
