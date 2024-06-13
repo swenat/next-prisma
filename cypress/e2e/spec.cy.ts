@@ -5,8 +5,8 @@ describe("template spec", () => {
 	it("passes", () => {
 		cy.visit("/"); //vi ser till att den går till localhost men kom ihåg att utvecklingsservern måste vara igång för att få det  att gå igenom för tillfället
 		cy.get("header").should("exist");
-		cy.get("header h1").contains("The Lysefeldt Gallery").should("be.visible");
+		cy.get("header h1").contains("Keep Track").should("be.visible");
 
-		cy.get("h1").contains("Welcome to my Blog").should("be.visible");
+		cy.get("h1").contains("Your todos").should("be.visible");
 	});
 });

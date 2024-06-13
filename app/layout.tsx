@@ -19,9 +19,7 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<header className="w-full bg-yellow-400 p-4 flex items-center justify-between">
 					<div className="flex items-center space-x-2">
-						<h1 className="text-white text-2xl font-bold">
-							The Lysefeldt Gallery
-						</h1>
+						<h1 className="text-white text-2xl font-bold">Keep track</h1>
 					</div>
 				</header>
 				{children}
