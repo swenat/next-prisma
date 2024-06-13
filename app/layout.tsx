@@ -17,7 +17,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<header className="w-full bg-blue-600 p-4 flex items-center justify-between">
+				<header className="w-full bg-yellow-400 p-4 flex items-center justify-between">
 					<div className="flex items-center space-x-2">
 						<h1 className="text-white text-2xl font-bold">
 							The Lysefeldt Gallery
