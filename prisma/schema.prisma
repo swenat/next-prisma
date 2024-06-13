@@ -15,3 +15,9 @@ model Post {
   title   String
   content String
 }
+
+model Todo {
+  id        Int     @id @default(autoincrement())
+  task      String
+  completed Boolean @default(false)
+}
