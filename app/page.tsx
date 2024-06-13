@@ -18,7 +18,10 @@ export default async function Home() {
 			<h1 className="text-2xl font-bold text-grey-700 mb-8">Your todos</h1>
 
 			{todos.map((todo) => (
-				<div key={todo.id} className="mb-4">
+				<div
+					key={todo.id}
+					className="bg-yellow-100 p-4 rounded-md shadow-md mb-4 w-full max-w-md"
+				>
 					<input
 						type="checkbox"
 						checked={todo.completed}
