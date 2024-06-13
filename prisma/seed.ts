@@ -10,6 +10,12 @@ async function main() {
 			content: "This is a test post",
 		},
 	});
+	await db.todo.create({
+		data: {
+			task: "Complete tutorial",
+			completed: false,
+		},
+	});
 }
 
 main()

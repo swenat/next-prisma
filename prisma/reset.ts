@@ -4,7 +4,8 @@ async function main() {
 	// NEVER ALLOW THIS OUTSIDE THE TEST ENVIRONMENT!!!
 	if (process.env.NODE_ENV !== "test") return;
 
-	await db.post.deleteMany({}); //lägg in för alla delarna, ta bort från alla tabeller så lägg till fler för varje här //
+	await db.post.deleteMany({});
+	await db.todo.deleteMany({}); //lägg in för alla delarna, ta bort från alla tabeller så lägg till fler för varje här //
 }
 main()
 	.then(async () => {
