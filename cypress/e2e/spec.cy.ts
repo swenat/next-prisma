@@ -1,16 +1,46 @@
-describe("template spec", () => {
+describe("Posts", () => {
 	beforeEach(() => {
 		cy.exec("npm run reset && npm run seed");
 	});
-	it("passes", () => {
-		cy.visit("/"); //vi ser till att den går till localhost men kom ihåg att utvecklingsservern måste vara igång för att få det  att gå igenom för tillfället
+	it("should display the posts correctly", () => {
+		cy.visit("/"); // Se till att utvecklingsservern är igång
 
-		//Header check
+		// Header-check
 		cy.get("header").should("exist");
 		cy.get("header h1").contains("Keep track").should("be.visible");
 
-		//Posts check
+		// Posts-check
+		cy.get("h1").contains("Your Diary Posts").should("be.visible");
+		cy.get("h2").should("have.length", 1); // Antal posts
+		cy.get("h2").contains("Sunday 21st met Daniel").should("be.visible");
+		cy.get("p")
+			.contains(
+				"We ate at this great cafe called Huntington I really hope we go again cause the coffee was out of this world."
+			)
+			.should("be.visible");
+	});
+});
+
+describe("Todos", () => {
+	beforeEach(() => {
+		cy.exec("npm run reset && npm run seed");
+	});
+
+	it("should display the todos correctly", () => {
+		cy.visit("/"); // Se till att utvecklingsservern är igång
+
+		// Header-check
+		cy.get("header").should("exist");
+		cy.get("header h1").contains("Keep track").should("be.visible");
+
+		// Todos-check
 		cy.get("h1").contains("Your todos").should("be.visible");
 		cy.get("input[type='checkbox']").should("have.length", 1);
+		cy.get("input[type='checkbox']").should("not.be.checked");
+		cy.get("span").contains("Complete tutorial").should("be.visible");
+
+		// Toggle todo and check
+		cy.get("input[type='checkbox']").check().should("be.checked");
+		cy.get("input[type='checkbox']").uncheck().should("not.be.checked");
 	});
 });

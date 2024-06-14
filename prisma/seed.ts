@@ -1,19 +1,23 @@
 import { db } from "./db";
 
 async function main() {
+	await db.todo.upsert({
+		where: { id: 1 },
+		update: {},
+		create: {
+			id: 1,
+			task: "Complete tutorial",
+			completed: false,
+		},
+	});
 	await db.post.upsert({
 		where: { id: 1 },
 		update: {},
 		create: {
 			id: 1,
-			title: "Hello World",
-			content: "This is a test post",
-		},
-	});
-	await db.todo.create({
-		data: {
-			task: "Complete tutorial",
-			completed: false,
+			title: "Sunday 21st met Daniel",
+			content:
+				"We ate at this great cafe called Huntington I really hope we go again cause the coffee was out of this world.",
 		},
 	});
 }

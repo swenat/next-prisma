@@ -1,5 +1,6 @@
-"use client";
 import { db } from "@/prisma/db";
+import Post from "./components/Post";
+import Todo from "./components/Todo";
 
 export default async function Home() {
 	const posts = await db.post.findMany({});
@@ -7,31 +8,27 @@ export default async function Home() {
 
 	return (
 		<main className="flex flex-col items-center justify-between p-4">
-			<h1 className="text-2xl font-bold text-grey-700 mb-8">Your Posts</h1>
+			<h1 className="text-2xl font-bold text-grey-700 mb-8">
+				Your Diary Posts
+			</h1>
 
 			{posts.map((post) => (
-				<div key={post.id}>
-					<h2 className="text-xl">{post.title}</h2>
-					<p className="text-neutral-700">{post.content}</p>
-				</div>
+				<Post
+					key={post.id}
+					id={post.id}
+					title={post.title}
+					content={post.content}
+				/>
 			))}
-			<h1 className="text-2xl font-bold text-grey-700 mb-8">Your todos</h1>
+			<h1 className="text-2xl font-bold text-grey-700 mb-8 mt-8">Your todos</h1>
 
 			{todos.map((todo) => (
-				<div
+				<Todo
 					key={todo.id}
-					className="bg-yellow-100 p-4 rounded-md shadow-md mb-4 w-full max-w-md"
-				>
-					<input
-						type="checkbox"
-						checked={todo.completed}
-						onChange={() => {}}
-						className="mr-2"
-					/>
-					<span className={todo.completed ? "line-through" : ""}>
-						{todo.task}
-					</span>
-				</div>
+					id={todo.id}
+					task={todo.task}
+					completed={todo.completed}
+				/>
 			))}
 		</main>
 	);
