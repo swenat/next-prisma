@@ -35,9 +35,10 @@ describe("Todos", () => {
 
 		// Todos-check
 		cy.get("h1").contains("Your todos").should("be.visible");
-		cy.get("input[type='checkbox']").should("have.length", 1);
-		cy.get("input[type='checkbox']").should("not.be.checked");
+		cy.get("input[type='checkbox']").should("have.length", 3);
 		cy.get("span").contains("Complete tutorial").should("be.visible");
+		cy.get("span").contains("Read a book").should("be.visible");
+		cy.get("span").contains("Go for a run").should("be.visible");
 
 		// Toggle todo and check
 		cy.get("input[type='checkbox']").check().should("be.checked");

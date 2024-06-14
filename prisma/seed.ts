@@ -1,6 +1,7 @@
 import { db } from "./db";
 
 async function main() {
+	//Todo
 	await db.todo.upsert({
 		where: { id: 1 },
 		update: {},
@@ -10,6 +11,27 @@ async function main() {
 			completed: false,
 		},
 	});
+
+	await db.todo.upsert({
+		where: { id: 2 },
+		update: {},
+		create: {
+			id: 2,
+			task: "Read a book",
+			completed: false,
+		},
+	});
+
+	await db.todo.upsert({
+		where: { id: 3 },
+		update: {},
+		create: {
+			id: 3,
+			task: "Go for a run",
+			completed: true,
+		},
+	});
+	//Post
 	await db.post.upsert({
 		where: { id: 1 },
 		update: {},
