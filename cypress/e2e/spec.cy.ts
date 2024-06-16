@@ -34,14 +34,16 @@ describe("Todos", () => {
 		cy.get("header h1").contains("Keep track").should("be.visible");
 
 		// Todos-check
-		cy.get("h1").contains("Your todos").should("be.visible");
+		cy.get("h1").contains("Your todos").should("be.visible"); //ändra till h2 på page
 		cy.get("input[type='checkbox']").should("have.length", 3);
 		cy.get("span").contains("Complete tutorial").should("be.visible");
 		cy.get("span").contains("Read a book").should("be.visible");
 		cy.get("span").contains("Go for a run").should("be.visible");
 
-		// Toggle todo and check
+		// Toggle todo and check SKIPPA DESSA
 		cy.get("input[type='checkbox']").check().should("be.checked");
 		cy.get("input[type='checkbox']").uncheck().should("not.be.checked");
 	});
 });
+
+//gör test som hämtar en av todos ladda om sidan och se om den fortfarande är completed
