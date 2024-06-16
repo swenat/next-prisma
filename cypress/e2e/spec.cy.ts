@@ -22,7 +22,7 @@ describe("Posts", () => {
 });
 
 describe("Todos", () => {
-	beforeEach(() => {
+	before(() => {
 		cy.exec("npm run reset && npm run seed");
 	});
 
@@ -41,8 +41,30 @@ describe("Todos", () => {
 		cy.get("span").contains("Go for a run").should("be.visible");
 
 		// Toggle todo and check SKIPPA DESSA
-		cy.get("input[type='checkbox']").check().should("be.checked");
-		cy.get("input[type='checkbox']").uncheck().should("not.be.checked");
+		cy.get("input[type='checkbox']").first().as("firstTodoCheckbox");
+
+		cy.get("@firstTodoCheckbox").check().should("be.checked");
+
+		cy.reload();
+
+		cy.get("@firstTodoCheckbox").should("be.checked");
+	});
+
+	it("should retain todo status after page reload", () => {
+		cy.visit("/");
+
+		cy.get("input[type='checkbox']")
+			.eq(0)
+			.as("firstTodoCheckbox")
+			.check()
+			.should("be.checked");
+		cy.get("input[type='checkbox']").eq(1).check().should("be.checked");
+		cy.get("input[type='checkbox']").eq(2).check().should("be.checked");
+
+		cy.reload();
+		cy.get("@firstTodoCheckbox").should("be.checked");
+		cy.get("input[type='checkbox']").eq(1).should("be.checked");
+		cy.get("input[type='checkbox']").eq(2).should("be.checked");
 	});
 });
 
