@@ -20,7 +20,7 @@ export default async function Home() {
 					content={post.content}
 				/>
 			))}
-			<h1 className="text-2xl font-bold text-grey-700 mb-8 mt-8">Your todos</h1>
+			<h2 className="text-2xl font-bold text-grey-700 mb-8 mt-8">Your todos</h2>
 
 			{todos.map((todo) => (
 				<Todo
