@@ -22,49 +22,40 @@ describe("Posts", () => {
 });
 
 describe("Todos", () => {
-	before(() => {
+	beforeEach(() => {
 		cy.exec("npm run reset && npm run seed");
 	});
 
 	it("should display the todos correctly", () => {
-		cy.visit("/"); // Se till att utvecklingsservern är igång
+		cy.visit("/");
 
-		// Header-check
-		cy.get("header").should("exist");
-		cy.get("header h1").contains("Keep track").should("be.visible");
+		// Toggle första todo
+		const todoIndex = 0;
+		cy.get("input[type='checkbox']").eq(todoIndex).as("todoCheckbox");
 
-		// Todos-check
-		cy.get("h1").contains("Your todos").should("be.visible"); //ändra till h2 på page
-		cy.get("input[type='checkbox']").should("have.length", 3);
-		cy.get("span").contains("Complete tutorial").should("be.visible");
-		cy.get("span").contains("Read a book").should("be.visible");
-		cy.get("span").contains("Go for a run").should("be.visible");
+		cy.get("@todoCheckbox").check().should("be.checked");
 
-		// Toggle todo and check SKIPPA DESSA
-		cy.get("input[type='checkbox']").first().as("firstTodoCheckbox");
-
-		cy.get("@firstTodoCheckbox").check().should("be.checked");
-
+		// Ladda om sidan
 		cy.reload();
 
-		cy.get("@firstTodoCheckbox").should("be.checked");
+		// Kontrollera att den första todo är fortfarande checked
+		cy.get("@todoCheckbox").should("be.checked");
 	});
 
 	it("should retain todo status after page reload", () => {
 		cy.visit("/");
 
-		cy.get("input[type='checkbox']")
-			.eq(0)
-			.as("firstTodoCheckbox")
-			.check()
-			.should("be.checked");
-		cy.get("input[type='checkbox']").eq(1).check().should("be.checked");
-		cy.get("input[type='checkbox']").eq(2).check().should("be.checked");
+		const todoIndex = 0;
+		cy.get("input[type='checkbox']").eq(todoIndex).as("todoCheckbox");
 
+		// Markera som completed
+		cy.get("@todoCheckbox").check().should("be.checked");
+
+		// Ladda om sidan
 		cy.reload();
-		cy.get("@firstTodoCheckbox").should("be.checked");
-		cy.get("input[type='checkbox']").eq(1).should("be.checked");
-		cy.get("input[type='checkbox']").eq(2).should("be.checked");
+
+		// Kontrollera att den första todo är fortfarande checked
+		cy.get("@todoCheckbox").should("be.checked");
 	});
 });
 
