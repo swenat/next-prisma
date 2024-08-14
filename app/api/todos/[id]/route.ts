@@ -1,6 +1,22 @@
 import { db } from "@/prisma/db";
 import { NextResponse } from "next/server";
 
+export async function POST(request: Request) {
+	const { task } = await request.json();
+
+	try {
+		const newTodo = await db.todo.create({
+			data: {
+				task,
+				completed: false,
+			},
+		});
+		return NextResponse.json(newTodo);
+	} catch (error) {
+		return NextResponse.error();
+	}
+}
+
 export async function PATCH(
 	request: Request,
 	{ params }: { params: { id: string } }
