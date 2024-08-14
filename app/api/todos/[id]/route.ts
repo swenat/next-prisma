@@ -18,3 +18,19 @@ export async function PATCH(
 		return NextResponse.error();
 	}
 }
+
+export async function DELETE(
+	request: Request,
+	{ params }: { params: { id: string } }
+) {
+	const { id } = params;
+
+	try {
+		await db.todo.delete({
+			where: { id: Number(id) },
+		});
+		return NextResponse.json({ message: "Todo deleted successfully" });
+	} catch (error) {
+		return NextResponse.error();
+	}
+}

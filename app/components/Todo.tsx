@@ -23,6 +23,13 @@ const Todo: React.FC<TodoProps> = ({ id, task, completed }) => {
 			body: JSON.stringify({ completed: updatedStatus }),
 		});
 	};
+	const handleDelete = async () => {
+		await fetch(`/api/todos/${id}`, {
+			method: "DELETE",
+		});
+
+		window.location.reload();
+	};
 
 	return (
 		<div
@@ -36,6 +43,12 @@ const Todo: React.FC<TodoProps> = ({ id, task, completed }) => {
 				className="mr-2"
 			/>
 			<span className={isCompleted ? "line-through" : ""}>{task}</span>
+			<button
+				onClick={handleDelete}
+				className="ml-4 px-2 py-1 bg-red-500 text-white rounded"
+			>
+				Delete
+			</button>
 		</div>
 	);
 };
