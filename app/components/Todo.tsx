@@ -8,15 +8,6 @@ interface TodoProps {
 	completed: boolean;
 }
 
-const getTodosFromLocalStorage = () => {
-	return JSON.parse(localStorage.getItem("todos") || "[]");
-};
-const saveTodosToLocalStorage = (
-	todos: { id: number; task: string; completed: boolean }[]
-) => {
-	localStorage.setItem("todos", JSON.stringify(todos));
-};
-
 const Todo: React.FC<TodoProps> = ({ id, task, completed }) => {
 	const [isCompleted, setIsCompleted] = useState(completed);
 
