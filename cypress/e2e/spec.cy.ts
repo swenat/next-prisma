@@ -26,37 +26,27 @@ describe("Todos", () => {
 		cy.exec("npm run reset && npm run seed");
 	});
 
-	it("should display the todos correctly", () => {
+	it("should be able to add a todo", () => {}); //lägga till inputfält i sidan och visa att den har rätt info som du skriver in.
+
+	it("should be able to complete a todo", () => {
 		cy.visit("/");
 
-		// Toggle första todo
 		const todoIndex = 0;
 		cy.get("input[type='checkbox']").eq(todoIndex).as("todoCheckbox");
-
 		cy.get("@todoCheckbox").check().should("be.checked");
 
-		// Ladda om sidan
 		cy.reload();
 
-		// Kontrollera att den första todo är fortfarande checked
 		cy.get("@todoCheckbox").should("be.checked");
 	});
 
-	it("should retain todo status after page reload", () => {
+	it("should be able to delete a todo", () => {
 		cy.visit("/");
-
-		const todoIndex = 0;
-		cy.get("input[type='checkbox']").eq(todoIndex).as("todoCheckbox");
-
-		// Markera som completed
-		cy.get("@todoCheckbox").check().should("be.checked");
-
-		// Ladda om sidan
-		cy.reload();
-
-		// Kontrollera att den första todo är fortfarande checked
-		cy.get("@todoCheckbox").should("be.checked");
+		cy.get("div.bg-yellow-100").should("have.length", 3);
+		cy.get("button").contains("Delete").first().click();
+		cy.get("div.bg-yellow-100").should("have.length", 2);
+		cy.get("div.bg-yellow-100").first().contains("Read a book");
 	});
 });
 
-//gör test som hämtar en av todos ladda om sidan och se om den fortfarande är completed
+//lägg till editera knapp samt test för denna
