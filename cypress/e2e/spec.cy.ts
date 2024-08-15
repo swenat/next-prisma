@@ -70,6 +70,24 @@ describe("Posts", () => {
 					cy.contains(updatedTask).should("be.visible");
 				});
 		});
+		it("should be able to cancel editing a todo", () => {
+			cy.visit("/");
+
+			cy.get("button").contains("Edit").first().click();
+
+			const originalTask = "Read a book";
+			const updatedTask = "Updated todo task";
+
+			cy.get("div.bg-yellow-100")
+				.first()
+				.within(() => {
+					cy.get("input[type='text']").clear().type(updatedTask);
+
+					cy.get("button").contains("Cancel").click();
+				});
+
+			cy.contains(originalTask).should("be.visible");
+		});
 
 		it("should be able to delete a todo", () => {
 			cy.visit("/");
