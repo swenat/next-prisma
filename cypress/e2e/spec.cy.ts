@@ -11,7 +11,7 @@ describe("Posts", () => {
 
 		// Posts-check
 		cy.get("h1").contains("Your Diary Posts").should("be.visible");
-		cy.get("h2").should("have.length", 1); // Antal posts
+		cy.get("h2").should("have.length", 1);
 		cy.get("h2").contains("Sunday 21st met Daniel").should("be.visible");
 		cy.get("p")
 			.contains(
@@ -50,6 +50,28 @@ describe("Posts", () => {
 			cy.get("@todoCheckbox").should("be.checked");
 		});
 
+		it("should display the edit button", () => {
+			cy.visit("/");
+			cy.get("button").contains("Edit").should("be.visible");
+		});
+
+		it("should be able to edit a todo", () => {
+			cy.visit("/");
+
+			cy.get("button").contains("Edit").first().click();
+			cy.get("div.bg-yellow-100")
+				.first()
+				.within(() => {
+					const updatedTask = "Updated todo task";
+
+					cy.get("input[type='text']").clear().type(updatedTask);
+
+					cy.get("button").contains("Save").click();
+
+					cy.contains(updatedTask).should("be.visible");
+				});
+		});
+
 		it("should be able to delete a todo", () => {
 			cy.visit("/");
 			cy.get("div.bg-yellow-100").should("have.length", 3);
@@ -59,4 +81,3 @@ describe("Posts", () => {
 		});
 	});
 });
-//lägg till editera knapp samt test för denn

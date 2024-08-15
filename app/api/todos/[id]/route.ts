@@ -22,12 +22,15 @@ export async function PATCH(
 	{ params }: { params: { id: string } }
 ) {
 	const { id } = params;
-	const { completed } = await request.json();
+	const { task, completed } = await request.json();
 
 	try {
 		const updatedTodo = await db.todo.update({
 			where: { id: Number(id) },
-			data: { completed },
+			data: {
+				task: task || undefined, // Uppdatera endast om task är definierad
+				completed: typeof completed === "boolean" ? completed : undefined,
+			},
 		});
 		return NextResponse.json(updatedTodo);
 	} catch (error) {

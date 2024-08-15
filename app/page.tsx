@@ -1,7 +1,7 @@
 import { db } from "@/prisma/db";
 import AddTodo from "./components/AddTodo";
 import Post from "./components/Post";
-import Todo from "./components/Todo";
+import TodoList from "./components/TodoList";
 
 export default async function Home() {
 	const posts = await db.post.findMany({});
@@ -24,7 +24,7 @@ export default async function Home() {
 			<h3 className="text-2xl font-bold text-grey-700 mb-8 mt-8">Your todos</h3>
 			<AddTodo />
 			{todos.map((todo) => (
-				<Todo
+				<TodoList
 					key={todo.id}
 					id={todo.id}
 					task={todo.task}
