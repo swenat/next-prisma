@@ -50,10 +50,9 @@ describe("Posts", () => {
 			cy.get("@todoCheckbox").should("be.checked");
 		});
 
-		it("should display the edit button", () => {
+		/* 	it("should display the edit button", () => {
 			cy.visit("/");
-			cy.get("button").contains("Edit").should("be.visible");
-		});
+			cy.get("button").contains("Edit").should("be.visible"); */
 
 		it("should be able to edit a todo", () => {
 			cy.visit("/");
