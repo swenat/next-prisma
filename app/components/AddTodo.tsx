@@ -14,8 +14,8 @@ const AddTodo: React.FC = () => {
 				},
 				body: JSON.stringify({ task }),
 			});
-			setTask(""); // Clear the input field
-			window.location.reload(); // Refresh the page to show the new todo
+			setTask("");
+			window.location.reload();
 		}
 	};
 
